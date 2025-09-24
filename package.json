@@ -1,0 +1,34 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.36.0",
+    "eslint-plugin-playwright": "^2.2.2",
+    "playwright-bdd": "^8.4.1",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json}\"",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "generate-index": "node generate-index.js",
+    "test": "npm run generate-index && node --no-deprecation ./node_modules/@cucumber/cucumber/bin/cucumber.js",
+    "test:watch": "cucumber-js --watch",
+    "test:chrome": "set BROWSER=chromium && npm test",
+    "test:edge": "set BROWSER=edge && npm test",
+    "test:firefox": "set BROWSER=firefox && npm test",
+    "test:safari": "set BROWSER=webkit && npm test",
+    "test:all": "npm run test:chrome && npm run test:edge && npm run test:firefox && npm run test:safari && echo. && echo All browser tests completed! && echo Individual reports in reports/ folder: && dir reports\\report-*.html /b && echo. && echo Open reports\\index.html to view all reports",
+    "test:all-browsers": "npm run test:chrome && npm run test:edge && npm run test:firefox && npm run test:safari"
+  },
+  "dependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.0"
+  }
+}
