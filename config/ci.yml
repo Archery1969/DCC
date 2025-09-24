@@ -1,0 +1,3 @@
+storefront_website_url: ${STOREFRONT_URL:-https://www.dreams.co.uk/}
+storefront_username: ${STOREFRONT_USERNAME:-test@example.com}
+storefront_password: ${STOREFRONT_PASSWORD:-testpassword}

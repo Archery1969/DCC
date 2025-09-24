@@ -8,7 +8,7 @@ export default defineConfig({
   timeout: GlobalTimeOut,
 
   use: {
-    headless: false,
+    headless: process.env.CI ? true : false,
     actionTimeout: GlobalTimeOut,
     navigationTimeout: GlobalTimeOut,
     screenshot: 'only-on-failure',

@@ -10,7 +10,14 @@ export function loadConfig(environment: string = 'prod'): Record<string, any> {
   try {
     const configPath = path.join(__dirname, '..', 'config', `${environment}.yml`);
     const configFile = fs.readFileSync(configPath, 'utf8');
-    const config = yaml.load(configFile) as Record<string, any>;
+
+    // Replace environment variables in config file
+    const expandedConfig = configFile.replace(/\$\{([^}]+)\}/g, (match, envVar) => {
+      const [varName, defaultValue] = envVar.split(':-');
+      return process.env[varName] || defaultValue || match;
+    });
+
+    const config = yaml.load(expandedConfig) as Record<string, any>;
     return config;
   } catch (error) {
     throw new Error(

@@ -1,2 +1,11 @@
 /node_modules/
 /reports/
+
+# Playwright
+test-results/
+playwright-report/
+
+# CI/CD
+.env
+.env.local
+.env.*.local
