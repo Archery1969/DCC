@@ -18,5 +18,4 @@ export class LoginPage {
     await customFill(LoginPageLocators.passwordInput(this.page), password, 'Password field');
     await customClick(LoginPageLocators.loginButton(this.page), 'Login button');
   }
-
 }

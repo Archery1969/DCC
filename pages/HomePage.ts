@@ -20,5 +20,4 @@ export class HomePage {
   async navigateToLogin() {
     await customClick(HomePageLocators.signinButton(this.page), 'Sign in button');
   }
-
 }
