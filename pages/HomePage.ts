@@ -9,6 +9,10 @@ export class HomePage {
     this.page = page;
   }
 
+  async verifyHomePage() {
+    await expect(this.page).toHaveTitle(HomePageLocators.expectedTitle);
+  }
+
   async acceptCookies() {
     await customClick(HomePageLocators.cookieAcceptButton(this.page), 'Accept Cookies button');
   }
@@ -17,7 +21,4 @@ export class HomePage {
     await customClick(HomePageLocators.signinButton(this.page), 'Sign in button');
   }
 
-  async verifyHomePage() {
-    await expect(this.page).toHaveTitle(HomePageLocators.expectedTitle);
-  }
 }

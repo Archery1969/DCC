@@ -9,13 +9,14 @@ export class LoginPage {
     this.page = page;
   }
 
+  async verifyLoginPage() {
+    await expect(this.page).toHaveTitle(LoginPageLocators.expectedTitle);
+  }
+
   async login(username: string, password: string) {
     await customFill(LoginPageLocators.usernameInput(this.page), username, 'Username field');
     await customFill(LoginPageLocators.passwordInput(this.page), password, 'Password field');
     await customClick(LoginPageLocators.loginButton(this.page), 'Login button');
   }
 
-  async verifyLoginPage() {
-    await expect(this.page).toHaveTitle(LoginPageLocators.expectedTitle);
-  }
 }
