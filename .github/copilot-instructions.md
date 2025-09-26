@@ -14,7 +14,6 @@ This is a **Playwright + Cucumber BDD** test automation framework using TypeScri
 ### Test Context Pattern
 All browser instances, page objects, and config are managed through the global `testContext` singleton:
 ```typescript
-// In step definitions - access shared context
 await testContext.pages!.homePage.verifyHomePage();
 await testContext.config!.storefront_username;
 ```
@@ -22,7 +21,6 @@ await testContext.config!.storefront_username;
 ### Locator Pattern
 Locators are functions returning Playwright `Locator` objects, not static selectors:
 ```typescript
-// locators/LoginPageLocators.ts
 usernameInput: (page: Page): Locator => page.locator('input[name="j_username"]')
 ```
 
@@ -38,16 +36,13 @@ Use `customClick()` and `customFill()` instead of native Playwright methods - th
 ## Essential Commands
 
 ```bash
-# Run tests on specific browser
-npm run test:chrome    # or test:edge, test:firefox
-npm run test:all       # Sequential run across all browsers
+npm run test:chrome
+npm run test:all
 
-# Development workflow
-npm run lint:fix       # Fix ESLint issues
-npm run format         # Format code with Prettier
-npm run ci             # Full CI pipeline (lint + format + headless tests)
+npm run lint:fix
+npm run format
+npm run ci
 
-# Watch mode for development
 npm run test:watch
 ```
 
