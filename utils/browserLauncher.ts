@@ -1,9 +1,9 @@
-import { chromium, firefox, Browser, BrowserContext, Page } from '@playwright/test';
+import { chromium, firefox, Browser, BrowserContext, Page, webkit } from '@playwright/test';
 import { PageManager } from './pageFactory.js';
 import { loadConfig } from './configLoader.js';
 import playwrightConfig from '../playwright.config.js';
 
-export type BrowserType = 'chromium' | 'edge' | 'firefox';
+export type BrowserType = 'chromium' | 'edge' | 'firefox' | 'safari';
 
 export class BrowserLauncher {
   private browser: Browser | null = null;
@@ -101,6 +101,8 @@ export class BrowserLauncher {
         return chromium; // Edge uses Chromium engine
       case 'firefox':
         return firefox;
+      case 'safari':
+        return webkit; // Safari uses WebKit engine
       default:
         return chromium;
     }

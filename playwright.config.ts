@@ -50,5 +50,11 @@ export default defineConfig({
         },
       },
     },
+    {
+      name: 'safari',
+      use: {
+        ...devices['Desktop Safari'],
+      },
+    },
   ],
 });
