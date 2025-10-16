@@ -1,4 +1,4 @@
-# Copilot Instructions for LGC Maine Standards
+# Copilot Instructions for DCC Test Automation
 
 ## Project Architecture
 
