@@ -1,22 +1,30 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import { testContext } from '../support/testContext.js';
+import { createBdd, test } from 'playwright-bdd';
+import { PageFactory } from '../../utils/pageFactory.js';
+import { loadConfig } from '../../utils/configLoader.js';
 
-Given('I am on the home page', async function () {
-  await testContext.pages!.homePage.verifyHomePage();
+const { Given, When, Then } = createBdd(test);
+
+const config = loadConfig(process.env.CI ? 'ci' : 'prod');
+
+Given('I am on the home page', async ({ page }) => {
+  await page.goto(config.storefront_website_url);
+  const pages = new PageFactory(page);
+  await pages.homePage.acceptCookies();
+  await pages.homePage.verifyHomePage();
 });
 
-When('I navigate to the login page', async function () {
-  await testContext.pages!.homePage.navigateToLogin();
-  await testContext.pages!.loginPage.verifyLoginPage();
+When('I navigate to the login page', async ({ page }) => {
+  const pages = new PageFactory(page);
+  await pages.homePage.navigateToLogin();
+  await pages.loginPage.verifyLoginPage();
 });
 
-When('I enter valid credentials', async function () {
-  await testContext.pages!.loginPage.login(
-    testContext.config!.storefront_username,
-    testContext.config!.storefront_password
-  );
+When('I enter valid credentials', async ({ page }) => {
+  const pages = new PageFactory(page);
+  await pages.loginPage.login(config.storefront_username, config.storefront_password);
 });
 
-Then('I should be logged in successfully', async function () {
-  await testContext.pages!.accountPage.verifyAccountPage();
+Then('I should be logged in successfully', async ({ page }) => {
+  const pages = new PageFactory(page);
+  await pages.accountPage.verifyAccountPage();
 });

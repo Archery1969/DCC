@@ -1,6 +1,5 @@
 import { Locator } from '@playwright/test';
-
-const GLOBAL_TIMEOUT = 15000;
+import { GLOBAL_TIMEOUT } from '../playwright.config.js';
 
 export async function customClick(
   locator: Locator,

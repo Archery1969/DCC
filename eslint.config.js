@@ -65,9 +65,10 @@ export default [
       'dist/',
       'build/',
       'coverage/',
+      '.features-gen/',
+      'playwright-report/',
+      'test-results/',
       '*.log',
-      'cucumber.cjs',
-      'cucumber-report.html',
     ],
   },
 ];

@@ -1,32 +1,27 @@
 {
   "type": "module",
   "devDependencies": {
-    "@cucumber/cucumber": "^12.2.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "@typescript-eslint/parser": "^8.44.0",
-    "cross-env": "^7.0.3",
     "eslint": "^9.36.0",
     "eslint-plugin-playwright": "^2.2.2",
     "playwright-bdd": "^8.4.1",
-    "prettier": "^3.6.2",
-    "ts-node": "^10.9.2"
+    "prettier": "^3.6.2"
   },
   "scripts": {
     "format": "prettier --write \"**/*.{ts,js,json}\"",
     "format:check": "prettier --check \"**/*.{ts,js,json}\"",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
-    "test": "node --no-deprecation ./node_modules/@cucumber/cucumber/bin/cucumber.js",
-    "test:watch": "cucumber-js --watch",
-    "test:chrome": "cross-env BROWSER=chromium npm test",
-    "test:edge": "cross-env BROWSER=edge npm test",
-    "test:firefox": "cross-env BROWSER=firefox npm test",
-    "test:safari": "cross-env BROWSER=safari npm test",
-    "test:headless": "cross-env CI=true npm test",
-    "test:all": "npm run test:chrome && npm run test:edge && npm run test:firefox && npm run test:safari && echo All browser tests completed! && echo Individual reports in reports/ folder: && dir reports\\report-*.html /b",
-    "ci": "npm run lint && npm run format:check && npm run test:headless"
+    "test": "npx bddgen && npx playwright test",
+    "test:chrome": "npx bddgen && npx playwright test --project=chromium",
+    "test:edge": "npx bddgen && npx playwright test --project=edge",
+    "test:firefox": "npx bddgen && npx playwright test --project=firefox",
+    "test:all": "npx bddgen && npx playwright test --project=chromium --project=edge --project=firefox",
+    "test:report": "npx playwright show-report",
+    "ci": "npm run lint && npm run format:check && npm run test"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",

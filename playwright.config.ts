@@ -1,16 +1,24 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+import { defineBddConfig } from 'playwright-bdd';
 
-const GlobalTimeOut = 30000;
+export const GLOBAL_TIMEOUT = 30000;
+
+const testDir = defineBddConfig({
+  paths: ['features/*.feature'],
+  steps: 'features/step_definitions/loginSteps.ts',
+});
 
 export default defineConfig({
-  fullyParallel: true,
+  testDir,
+  fullyParallel: false,
+  workers: 1,
   reporter: 'html',
-  timeout: GlobalTimeOut,
+  timeout: GLOBAL_TIMEOUT,
 
   use: {
     headless: process.env.CI ? true : false,
-    actionTimeout: GlobalTimeOut,
-    navigationTimeout: GlobalTimeOut,
+    actionTimeout: GLOBAL_TIMEOUT,
+    navigationTimeout: GLOBAL_TIMEOUT,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
@@ -22,38 +30,10 @@ export default defineConfig({
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
         viewport: null,
         launchOptions: {
           args: ['--start-maximized'],
         },
-      },
-    },
-    {
-      name: 'edge',
-      use: {
-        ...devices['Desktop Edge'],
-        channel: 'msedge',
-        viewport: null,
-        launchOptions: {
-          args: ['--start-maximized'],
-        },
-      },
-    },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-        viewport: null,
-        launchOptions: {
-          args: ['--start-maximized'],
-        },
-      },
-    },
-    {
-      name: 'safari',
-      use: {
-        ...devices['Desktop Safari'],
       },
     },
   ],
