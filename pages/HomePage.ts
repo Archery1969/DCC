@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { HomePageLocators } from '../locators/HomePageLocators.js';
-import { customClick } from '../utils/helper.js';
+import { customClick, isMobile } from '../utils/helper.js';
 
 export class HomePage {
   readonly page: Page;
@@ -18,6 +18,9 @@ export class HomePage {
   }
 
   async navigateToLogin() {
+    if (isMobile(this.page)) {
+      await customClick(HomePageLocators.mobileMenuButton(this.page), 'Mobile menu button');
+    }
     await customClick(HomePageLocators.signinButton(this.page), 'Sign in button');
   }
 }

@@ -1,5 +1,9 @@
-import { Locator } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { GLOBAL_TIMEOUT } from '../playwright.config.js';
+
+export function isMobile(page: Page): boolean {
+  return (page.viewportSize()?.width ?? 1920) < 768;
+}
 
 export async function customClick(
   locator: Locator,
