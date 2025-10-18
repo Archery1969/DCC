@@ -31,7 +31,8 @@ export default defineConfig({
       name: 'Chrome',
       use: { ...devices['Desktop Chrome'], isMobile: false },
     },
-    { name: 'Edge', use: { ...devices['Desktop Edge'], isMobile: false } },
+    { name: 'Edge', 
+      use: { ...devices['Desktop Edge'], isMobile: false } },
     {
       name: 'Firefox',
       use: { ...devices['Desktop Firefox'], isMobile: false },
